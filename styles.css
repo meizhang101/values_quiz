@@ -1,0 +1,250 @@
+body {
+  background-image: url(city.jpg);
+  background-color: #ccc;
+  color: black;
+  margin-bottom: 3.75em;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;	
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+	display: inline;
+	float: right ;
+}
+
+li a {
+	display: block;
+	text-align: center;
+	color: black;
+	text-decoration: none;
+	padding: 14px 10px;
+	font-family: "Roboto", sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+li a:hover {
+	color: white; 
+}
+
+p {
+	font-family: "Roboto", sans-serif;
+}
+
+.right {
+	float: right;
+}
+
+#content-wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#topnav-wrap {
+	margin: 10px;
+}
+
+#values-quiz {
+	font-family: "Roboto", sans-serif;
+	font-weight: bold;
+}
+
+#top-text {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+}
+
+#top-text p {
+	font-size: 14pt;
+	line-height: 20pt;
+}
+
+#ending button:hover {
+	transform: scale(1.1);
+
+}
+
+button {
+	font-family: "Roboto", sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	box-sizing: border-box;
+	border-radius: 2em;
+	background-color: rgba(255, 255, 255, 0.6);
+	padding:0.35em 1.2em;
+	font-size: 16px;
+	border:0.1em solid #222;
+	margin: 0.3em;
+
+}
+
+#ending button {
+	margin-top: 2em;
+	background-color: #222;
+	color: #FFF;
+
+}
+
+.description {
+	display: none; 
+	margin-top: 0.5em;
+	color: #555; 
+	font-family: "Roboto", sans-serif;
+	position: absolute;  
+	background-color: #FFF;
+	border:0.1em solid #555;
+	border-radius: 1em;
+	padding: 0.35em 1.2em;
+	max-width: 10em;
+}	
+
+.value-box {	
+	justify-self: center;
+	width: -webkit-fit-content;
+	height: -webkit-fit-content;
+}
+
+
+#values-list {
+	margin-top: 2em;
+	display: grid;
+	width: 60%;
+	grid-template-columns: repeat(4, 1fr);
+	grid-row-gap: 15px;
+	
+}
+
+#intro {
+	width: 42%;
+	text-align: justify;
+}
+
+#instructions {
+	text-align: center;
+
+}
+
+.bold {
+	font-weight: bolder; 
+	color: black;
+}
+
+.selected {
+	background-color: #222;
+	color: #FFF;
+}
+
+#values-rank {
+	display: flex;
+	flex-direction: row;
+}
+
+.val-compare {
+	width: 20em;
+	padding: 1em 1.5em;
+	position: relative;
+}
+
+.val-compare p {
+	font-size: 14pt;
+	padding-bottom: 2rem;
+}
+
+.val-compare h1 {
+	font-size: 32pt;
+}
+
+.val-compare button {
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+
+}
+
+#right {
+	left: 1em;
+}
+
+
+#left {
+	right: 1em;
+}
+
+hr {
+	border-color: black;
+}
+
+#val-left {
+	text-align: right;
+}
+
+#results {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+#results ol {
+	display: flex;
+	flex-direction: column;
+
+	list-style: none;
+	counter-reset: i;
+	margin: 0;
+	padding: 0;
+}
+
+#results ol li {
+	width: 100%;
+	counter-increment: i;
+	font-size: 0.8rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1.5rem;
+
+	background-clip: padding-box;
+	background-color: rgba(255, 255, 255, 0.6);
+
+
+	display: flex;
+  	flex-direction: row;
+}
+
+#results ol li::before {
+  content: counter(i) ".";
+  font-weight: bold;
+  font-size: 2em;
+  margin-top: 0.08em;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  font-family: 'Abril Fatface', serif;
+  line-height: 1;
+}
+
+.results-title {
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	font-size: 2em;
+}
+
+.results-description {
+	font-size: 1.5em;
+	font-family: "Poppins"; 
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
