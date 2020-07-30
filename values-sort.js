@@ -2,7 +2,7 @@
 let listOfValues = {
 	"ambition": "a strong desire to do or to achieve something, typically requiring determination and hard work",
 	"competency": "the ability to do something successfully or efficiently",
-	"individuality": "the quality or character of a particular person or thing that distinguishes them from others of the same kind",
+	"individality": "the quality or character of a particular person or thing that distinguishes them from others of the same kind",
 	"equality": "the state of being equal, especially in status, rights, and opportunities",
 	"integrity": "adherence to moral and ethical principles; soundness of moral character; honesty",
 	"service": "an act of helpful activity, giving aid, helpfulness",
@@ -78,7 +78,7 @@ let subrounds = 0;
 let sizeSR = 0; 
 
 
-
+//creates the buttons wtih the values and their hover description based on inputs from above list
 for(const type in listOfValues) {
 	//create the button with the value and give it an ID too
 	let btn = document.createElement("button");
@@ -216,38 +216,34 @@ function oneToOne(){
 
 	//create left framework
 	let left = document.createElement("div"); 
-	left.setAttribute("class", "val-compare"); 
+	left.setAttribute("class", "val-compare val-left"); 
 	left.setAttribute("id", "val-left"); 
 	let h1Left = document.createElement("h1"); 
 	h1Left.setAttribute("id", "h1Left"); 
+	h1Left.setAttribute("class", "val-left"); 
 	let pLeft = document.createElement("p"); 
-	let btnLeft = document.createElement("button"); 
-	btnLeft.addEventListener("click", selectValWrap);
-	btnLeft.innerHTML = "left"; 
-	btnLeft.setAttribute("type", "button"); 
-	btnLeft.setAttribute("id", "left");
+	pLeft.setAttribute("class", "val-left"); 
 
+	left.addEventListener("click", selectValWrap);
+	
 	left.appendChild(h1Left);
 	left.appendChild(pLeft);
-	left.appendChild(btnLeft); 
 
 	let hr = document.createElement("hr");
 
 	let right = document.createElement("div"); 
-	right.setAttribute("class", "val-compare"); 
+	right.setAttribute("class", "val-compare val-right"); 
 	right.setAttribute("id", "val-right"); 
 	let h1Right = document.createElement("h1"); 
 	h1Right.setAttribute("id", "h1Right");
+	h1Right.setAttribute("class", "val-right");
 	let pRight = document.createElement("p"); 
-	let btnRight = document.createElement("button"); 
-	btnRight.addEventListener("click", selectValWrap);
-	btnRight.innerHTML = "right"; 
-	btnRight.setAttribute("type", "button"); 
-	btnRight.setAttribute("id", "right");
+	pRight.setAttribute("class", "val-right"); 
+
+	right.addEventListener("click", selectValWrap);
 
 	right.appendChild(h1Right); 
 	right.appendChild(pRight);
-	right.appendChild(btnRight); 
 
 	//append to the values-rank portion
 	let valRank = document.getElementById("values-rank");
@@ -451,8 +447,12 @@ function bigRound() {
 }
 
 
+
+
 function selectVal(btn) {
-	if(btn.id !== "deselect" && btn.id !== "chosen" && btn.id !== "left" && btn.id !== "right"){
+	console.log(btn);
+	if(btn.id !== "deselect" && btn.id !== "chosen" && btn.className !== "val-left" && btn.className !== "val-right" &&
+		btn.className !== "val-compare val-left" && btn.className !== "val-compare val-right" && btn.id !== "selectAll"){
 		if(btn.classList.contains("selected")) {
 			btn.classList.remove("selected");  
 			let idx = selectedVals.indexOf(btn); 
@@ -461,6 +461,7 @@ function selectVal(btn) {
 		}
 		else {
 			btn.classList.add("selected");
+			btn.nextSibling.style.display = "none"; 
 			selectedVals.push(btn); 
 		}
 	}
@@ -469,6 +470,11 @@ function selectVal(btn) {
 		onBoard.forEach(button => button.classList.remove("selected")); 
 		selectedVals = [];
 	}
+	else if(btn.id === "selectAll") {
+		onBoard.forEach(button => button.classList.add("selected")); 
+		selectedVals = onBoard.slice(); 
+	}
+
 	else if(btn.id === "chosen"){	
 		//check if any values are even selected
 		if(finalStage) {
@@ -488,13 +494,22 @@ function selectVal(btn) {
 			alert("Must choose at least one value"); 
 		}
 		else {
+			let size = document.getElementById("ending").children.length;
+			if(size !== 3) {
+				let selectAll = document.createElement("button"); 
+				selectAll.setAttribute("type", "button");
+				selectAll.setAttribute("id", "selectAll"); 
+				selectAll.addEventListener("click", selectValWrap);
+				selectAll.innerHTML = "Select All"; 
+				document.getElementById("ending").prepend(selectAll); 
+			}
 			bigRound(); 
 		}
 	}
-	else if(btn.id === "left") {
+	else if(btn.className === "val-left" || btn.className === "val-compare val-left") {
 		sortTen(nextRoundVals, 1); 
 	}
-	else if(btn.id === "right") {
+	else if(btn.className === "val-right" || btn.className === "val-compare val-right") {
 		sortTen(nextRoundVals, -1); 
 	}
 }
@@ -510,7 +525,16 @@ subrounds = 1;
 let finalStage = false; 
 inRound.forEach(button => button.addEventListener("click", selectValWrap));
 
-	$(document).ready(function() {
+document.body.addEventListener('keydown', function(event) { 
+    const key = event.key; 
+    if (key === "ArrowLeft")
+    	selectVal(document.getElementById("val-left")); 
+    else if(key === "ArrowRight")
+    	selectVal(document.getElementById("val-right")); 
+        
+}); 
+
+$(document).ready(function() {
 		$(".val-button").hover(
 			function() {
 				if(!$(this).hasClass("selected")) 
@@ -522,4 +546,9 @@ inRound.forEach(button => button.addEventListener("click", selectValWrap));
 		);
 	});
 
+	
+/*  still have to implememnt selected val features 
+	and put an intro page in. like hey this is a values quiz beign to take test.
+	put survey inside it too. to track how many people have come to /visited the page so we can compare values.
+*/
 
